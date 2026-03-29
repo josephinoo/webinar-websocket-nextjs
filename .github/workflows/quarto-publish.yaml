@@ -1,4 +1,4 @@
-name: Render and Publish Quarto Slides  Pages
+name: Render and Publish Quarto Slides Pages
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -21,6 +21,9 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,10 +31,23 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Render Quarto
+        run: quarto render slides/whatsapp-chat.qmd
+        
+      - name: Prepare Site
+        run: |
+          mkdir _site
+          mv slides/whatsapp-chat.html _site/index.html
+          if [ -d "slides/whatsapp-chat_files" ]; then mv slides/whatsapp-chat_files _site/; fi
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          target: gh-pages
-          path: slides/whatsapp-chat.qmd
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
