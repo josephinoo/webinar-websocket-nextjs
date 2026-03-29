@@ -1,4 +1,4 @@
-name: Render and Publish Quarto Slides en github pages
+name: Render and Publish Quarto Slides  Pages
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
       - master
     paths:
-      - "slides/**"
+      - 'slides/**'
   workflow_dispatch:
 
 permissions:
