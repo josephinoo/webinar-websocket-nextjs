@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Ocultar barra de desplazamiento para tener una UI más limpia tipo app */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2a3942;
+  border-radius: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

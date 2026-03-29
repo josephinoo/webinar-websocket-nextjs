@@ -1,0 +1,826 @@
+---
+title: "Crea tu propio WhatsApp"
+subtitle: "Chat en tiempo real — sin magia, sin misterio"
+author: "@josephino"
+date: "2025-01-01"
+format:
+  revealjs:
+    theme: [dark, chat-theme.scss]
+    transition: fade
+    transition-speed: fast
+    slide-number: c/t
+    progress: true
+    controls: true
+    controls-layout: bottom-right
+    footer: "Webinar — Chat en Tiempo Real · Next.js · Socket.io"
+    width: 1050
+    height: 700
+    margin: 0.05
+    min-scale: 0.1
+    max-scale: 0.9
+    highlight-style: github-dark
+    code-line-numbers: false
+    code-copy: true
+    incremental: false
+    center-title-slide: true
+    auto-animate-easing: ease-in-out
+    auto-animate-unmatched: false
+    auto-animate-duration: 0.8
+title-slide-attributes:
+  data-background-color: "#0d0d0d"
+execute:
+  echo: true
+  eval: false
+---
+
+# ¿Cómo funciona WhatsApp? {background-color="#0d0d0d"}
+
+## Cuando mandas un mensaje... {.center}
+
+::: {.r-fit-text}
+¿A dónde va? 🤔
+:::
+
+## El mensaje no vuela solo {.center}
+
+```{=html}
+<div class="journey">
+  <div class="journey-item fade-item" style="animation-delay:0.1s">
+    <div class="j-icon">📱</div>
+    <div class="j-label">Tu teléfono</div>
+  </div>
+  <div class="journey-arrow fade-item" style="animation-delay:0.5s">➔</div>
+  <div class="journey-item fade-item" style="animation-delay:0.9s">
+    <div class="j-icon">🏢</div>
+    <div class="j-label">Servidor<br>WhatsApp</div>
+  </div>
+  <div class="journey-arrow fade-item" style="animation-delay:1.3s">➔</div>
+  <div class="journey-item fade-item" style="animation-delay:1.7s">
+    <div class="j-icon">📱</div>
+    <div class="j-label">Tu amigo</div>
+  </div>
+</div>
+```
+
+::: {.fragment .fade-up}
+::: {.box-muted}
+Siempre hay un **servidor en el medio**. WhatsApp, Instagram, Slack, Discord — todos funcionan igual.
+:::
+:::
+
+# HTTP — el cartero viejo 📬 {background-color="#0d0d0d"}
+
+## Así funciona una página web normal {auto-animate=true}
+
+```{=html}
+<div class="http-anim" id="http-scene">
+  <div class="actor" id="act-browser">
+    <div class="actor-icon">💻</div>
+    <div class="actor-name">Tu Browser</div>
+  </div>
+  <div class="http-lane" id="http-lane">
+  </div>
+  <div class="actor" id="act-server">
+    <div class="actor-icon">🖥️</div>
+    <div class="actor-name">Servidor</div>
+  </div>
+</div>
+
+<div id="http-msg" class="http-step-msg"></div>
+
+<div class="btn-row">
+  <button class="demo-btn" onclick="httpStep()">▶ Siguiente paso</button>
+  <button class="demo-btn demo-btn-ghost" onclick="httpReset()">↺ Reiniciar</button>
+</div>
+
+<script>
+var httpStepN = 0;
+var httpSteps = [
+  { msg: "1️⃣  Browser pide la página:  GET /inicio", arrow: "→", cls: "arrow-out", label: "¿Qué hay en tu web?" },
+  { msg: "2️⃣  Servidor responde con el HTML", arrow: "←", cls: "arrow-in", label: "Aquí tienes el HTML" },
+  { msg: "3️⃣  Conexión cerrada ✗ — listo.", arrow: null, cls: "", label: "👋 Adiós" },
+];
+
+function httpStep() {
+  var lane = document.getElementById('http-lane');
+  var msgEl = document.getElementById('http-msg');
+  if (httpStepN >= httpSteps.length) return;
+  var s = httpSteps[httpStepN];
+  msgEl.textContent = s.msg;
+  msgEl.classList.add('msg-visible');
+  if (s.arrow) {
+    var arr = document.createElement('div');
+    arr.className = 'http-arrow ' + s.cls;
+    arr.innerHTML = s.arrow + ' <span class="arr-label">' + s.label + '</span>';
+    lane.appendChild(arr);
+    setTimeout(function(){ arr.classList.add('arr-show'); }, 50);
+  } else {
+    lane.innerHTML += '<div class="conn-close">✗ Conexión cerrada</div>';
+  }
+  httpStepN++;
+}
+
+function httpReset() {
+  httpStepN = 0;
+  document.getElementById('http-lane').innerHTML = '';
+  var m = document.getElementById('http-msg');
+  m.textContent = '';
+  m.classList.remove('msg-visible');
+}
+</script>
+```
+
+## El problema para un chat {auto-animate=true}
+
+::: {data-id="polling-title"}
+Con HTTP tienes que **preguntar cada segundo:**
+:::
+
+## El problema para un chat {auto-animate=true}
+
+::: {data-id="polling-title"}
+Con HTTP tienes que **preguntar cada segundo:**
+:::
+
+```{=html}
+<div class="polling-demo">
+  <div class="poll-row"><span class="poll-q">Browser → "¿Hay mensajes?"</span> <span class="poll-a poll-no">← No.</span></div>
+  <div class="poll-row"><span class="poll-q">Browser → "¿Hay mensajes?"</span> <span class="poll-a poll-no">← No.</span></div>
+  <div class="poll-row"><span class="poll-q">Browser → "¿Hay mensajes?"</span> <span class="poll-a poll-no">← No.</span></div>
+  <div class="poll-row"><span class="poll-q">Browser → "¿Hay mensajes?"</span> <span class="poll-a poll-no">← No.</span></div>
+  <div class="poll-row"><span class="poll-q">Browser → "¿Hay mensajes?"</span> <span class="poll-a poll-yes">← ¡Sí! "Hola 👋"</span></div>
+</div>
+```
+
+::: {.fragment .fade-up}
+::: {.box-accent}
+Esto se llama **polling** — y es como llamar al cartero cada minuto para preguntar si llegó algo. 📬
+:::
+:::
+
+## En números reales 🔥
+
+```{=html}
+<div class="numbers-reveal">
+  <div class="num-block fade-item" style="animation-delay:0.2s">
+    <span class="big-num">1.000</span>
+    <span class="num-desc">usuarios en el chat</span>
+  </div>
+  <div class="num-op fade-item" style="animation-delay:0.6s">×</div>
+  <div class="num-block fade-item" style="animation-delay:1.0s">
+    <span class="big-num">1</span>
+    <span class="num-desc">request / segundo</span>
+  </div>
+  <div class="num-op fade-item" style="animation-delay:1.4s">=</div>
+  <div class="num-block num-block-hot fade-item" style="animation-delay:1.8s">
+    <span class="big-num">1.000</span>
+    <span class="num-desc">requests / segundo 🔥</span>
+  </div>
+</div>
+```
+
+::: {.fragment .fade-up}
+::: {.box-accent}
+Y de esas 1.000 requests... **el 99% responden "No hay nada."**
+
+Le estás gritando al cartero mil veces y casi nunca tiene carta.
+:::
+:::
+
+# WebSocket — el teléfono que no cuelga ☎️ {background-color="#0d0d0d"}
+
+## La analogía perfecta
+
+:::: {.columns}
+::: {.column width="50%"}
+
+::: {.box-muted}
+**HTTP = Cartas por correo** 📬
+
+Escribes → Mandas → Esperas → Recibes respuesta → **Se termina**
+
+Para otra cosa: empiezas de cero otra vez.
+:::
+
+:::
+::: {.column width="50%"}
+
+::: {.fragment .fade-left}
+::: {.box-accent}
+**WebSocket = Llamada telefónica** ☎️
+
+Marcas una vez → Canal abierto → Hablas cuando quieras → Escuchas cuando quieras
+
+**La línea no se corta hasta que tú la cierras.**
+:::
+:::
+
+:::
+::::
+
+## Cómo se abre la conexión WebSocket {auto-animate=true}
+
+```{=html}
+<div class="ws-scene" id="ws-scene">
+  <div class="ws-actor">
+    <div class="ws-icon">📱</div>
+    <div class="ws-name">Tu browser</div>
+  </div>
+  <div class="ws-middle" id="ws-middle">
+    <div class="ws-line ws-line-off" id="ws-line"></div>
+  </div>
+  <div class="ws-actor">
+    <div class="ws-icon">🖥️</div>
+    <div class="ws-name">Servidor</div>
+  </div>
+</div>
+<div class="ws-status" id="ws-status">Canal: <span class="status-off">Cerrado ✗</span></div>
+<div class="ws-log" id="ws-log"></div>
+
+<div class="btn-row">
+  <button class="demo-btn" onclick="wsStep()">▶ Siguiente</button>
+  <button class="demo-btn demo-btn-ghost" onclick="wsReset()">↺ Reiniciar</button>
+</div>
+
+<script>
+var wsN = 0;
+var wsSteps = [
+  { log: '📤 Browser → "¿Podemos abrir un canal WebSocket?"', status: null },
+  { log: '📥 Servidor → "¡Claro! Canal abierto."', status: 'open' },
+  { log: '💬 Browser → Servidor: "Hola Ana!"', status: null },
+  { log: '💬 Servidor → Browser: "Hola Carlos! 👋"', status: null },
+  { log: '💬 Servidor → Browser: "Ana dice: ¿cómo estás?"', status: null },
+  { log: '💬 Browser → Servidor: "¡Muy bien!"', status: null },
+];
+function wsStep() {
+  if (wsN >= wsSteps.length) return;
+  var s = wsSteps[wsN];
+  var log = document.getElementById('ws-log');
+  var line = document.createElement('div');
+  line.className = 'ws-log-line';
+  line.textContent = s.log;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+  if (s.status === 'open') {
+    document.getElementById('ws-line').classList.remove('ws-line-off');
+    document.getElementById('ws-line').classList.add('ws-line-on');
+    document.getElementById('ws-status').innerHTML = 'Canal: <span class="status-on">Abierto 🟢 (permanente)</span>';
+  }
+  wsN++;
+}
+function wsReset() {
+  wsN = 0;
+  document.getElementById('ws-log').innerHTML = '';
+  document.getElementById('ws-line').classList.remove('ws-line-on');
+  document.getElementById('ws-line').classList.add('ws-line-off');
+  document.getElementById('ws-status').innerHTML = 'Canal: <span class="status-off">Cerrado ✗</span>';
+}
+</script>
+```
+
+## HTTP vs WebSocket — visual {.center}
+
+```{=html}
+<div class="vs-layout">
+
+  <div class="vs-col">
+    <div class="vs-title">🐌 HTTP Polling</div>
+    <div class="vs-content">
+      <div class="vs-row"><span class="pill red">→ ¿Hay msgs?</span><span class="pill grey">← No.</span></div>
+      <div class="vs-row"><span class="pill red">→ ¿Hay msgs?</span><span class="pill grey">← No.</span></div>
+      <div class="vs-row"><span class="pill red">→ ¿Hay msgs?</span><span class="pill grey">← No.</span></div>
+      <div class="vs-row"><span class="pill red">→ ¿Hay msgs?</span><span class="pill green">← ¡Sí! "Hola"</span></div>
+      <div class="vs-row"><span class="pill red">→ ¿Hay msgs?</span><span class="pill grey">← No.</span></div>
+    </div>
+    <div class="vs-footer bad">Muchas conexiones. Casi siempre vacías.</div>
+  </div>
+
+  <div class="vs-divider">VS</div>
+
+  <div class="vs-col">
+    <div class="vs-title">⚡ WebSocket</div>
+    <div class="vs-content ws-channel-box">
+      <div class="ws-channel-bar">🟢 CANAL ABIERTO</div>
+      <div class="ws-msg out">→ "Hola Ana!"</div>
+      <div class="ws-msg in">← "Hola Carlos!"</div>
+      <div class="ws-msg in">← "¿Cómo estás? 😊"</div>
+      <div class="ws-msg out">→ "¡Muy bien!"</div>
+      <div class="ws-msg in">← "Me alegra 🎉"</div>
+    </div>
+    <div class="vs-footer good">1 sola conexión. Mensajes instantáneos.</div>
+  </div>
+
+</div>
+```
+
+# Socket.io — WebSocket sin dolor 🚀 {background-color="#0d0d0d"}
+
+## ¿Qué es Socket.io?
+
+:::: {.columns}
+::: {.column width="55%"}
+
+Socket.io es una librería de JavaScript que hace que los WebSockets sean **fáciles de usar**.
+
+::: {.fragment .fade-up}
+Imagina que construir WebSocket nativo es como fabricar tu propio teléfono desde cero.
+
+**Socket.io ya te da el teléfono armado. 📞**
+:::
+
+:::
+::: {.column width="45%"}
+
+::: {.fragment .fade-up}
+::: {.box-accent}
+✅ Salas de chat incluidas
+
+✅ Reconexión automática
+
+✅ Funciona en todos los browsers
+
+✅ Enviar mensajes a grupos
+
+✅ Detectar quién se conecta y desconecta
+:::
+:::
+
+:::
+::::
+
+## La idea central — Eventos 🎯
+
+::: {.fragment .fade-up}
+En Socket.io todo funciona con **eventos**. Un evento es: *algo pasó, tiene un nombre*.
+:::
+
+::: {.fragment .fade-up}
+```{=html}
+<div class="events-grid">
+  <div class="event-card">
+    <div class="ev-icon">🔔</div>
+    <div class="ev-name">"enviar-mensaje"</div>
+    <div class="ev-desc">Alguien mandó texto</div>
+  </div>
+  <div class="event-card">
+    <div class="ev-icon">👋</div>
+    <div class="ev-name">"usuario-conectado"</div>
+    <div class="ev-desc">Alguien entró al chat</div>
+  </div>
+  <div class="event-card">
+    <div class="ev-icon">✍️</div>
+    <div class="ev-name">"está-escribiendo"</div>
+    <div class="ev-desc">Alguien tipea</div>
+  </div>
+  <div class="event-card">
+    <div class="ev-icon">👋</div>
+    <div class="ev-name">"usuario-salió"</div>
+    <div class="ev-desc">Alguien cerró el chat</div>
+  </div>
+</div>
+```
+:::
+
+::: {.fragment .fade-up}
+::: {.box-muted}
+Exactamente como la vida real: suena el timbre → *evento "timbre"* → abres la puerta.
+:::
+:::
+
+## Solo dos palabras que necesitas saber {auto-animate=true}
+
+::: {data-id="two-words"}
+```{=html}
+<div class="two-words">
+  <div class="word-card" style="opacity:0.3">
+    <div class="word-big">emit</div>
+    <div class="word-meaning">???</div>
+  </div>
+  <div class="word-card" style="opacity:0.3">
+    <div class="word-big">on</div>
+    <div class="word-meaning">???</div>
+  </div>
+</div>
+```
+:::
+
+## Solo dos palabras que necesitas saber {auto-animate=true}
+
+::: {data-id="two-words"}
+```{=html}
+<div class="two-words">
+  <div class="word-card word-active">
+    <div class="word-big">emit</div>
+    <div class="word-meaning">📤 ENVIAR un evento</div>
+    <div class="word-example">socket.emit("enviar-mensaje", "Hola!")</div>
+  </div>
+  <div class="word-card word-active">
+    <div class="word-big">on</div>
+    <div class="word-meaning">📥 ESCUCHAR un evento</div>
+    <div class="word-example">socket.on("mensaje-nuevo", (msg) => { ... })</div>
+  </div>
+</div>
+```
+:::
+
+::: {.fragment .fade-up}
+::: {.box-accent}
+Con `emit` y `on` construyes **cualquier feature de un chat real**. Eso es todo.
+:::
+:::
+
+# El flujo completo — en vivo 🎬 {background-color="#0d0d0d"}
+
+## ¿Qué pasa cuando mandas "Hola"? {auto-animate=true}
+
+```{=html}
+<div class="flow-scene" id="flow-scene">
+
+  <div class="flow-actor" id="fa-carlos">
+    <div class="fa-icon">📱</div>
+    <div class="fa-name">Carlos</div>
+    <div class="chat-preview" id="chat-carlos">
+      <div class="cp-bubble cp-out">Hola 👋</div>
+    </div>
+  </div>
+
+  <div class="flow-server" id="fa-server">
+    <div class="fa-icon">🖥️</div>
+    <div class="fa-name">Servidor</div>
+    <div class="server-log-mini" id="slog">
+      <span class="slog-idle">esperando...</span>
+    </div>
+  </div>
+
+  <div class="flow-actor" id="fa-ana">
+    <div class="fa-icon">📱</div>
+    <div class="fa-name">Ana</div>
+    <div class="chat-preview" id="chat-ana">
+      <div class="cp-idle">...</div>
+    </div>
+  </div>
+
+  <div class="flow-actor" id="fa-luis">
+    <div class="fa-icon">📱</div>
+    <div class="fa-name">Luis</div>
+    <div class="chat-preview" id="chat-luis">
+      <div class="cp-idle">...</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="btn-row" style="margin-top:1em">
+  <button class="demo-btn" onclick="flowPlay()">▶ Ver cómo viaja el mensaje</button>
+  <button class="demo-btn demo-btn-ghost" onclick="flowReset()">↺ Reiniciar</button>
+</div>
+
+<script>
+var flowPlaying = false;
+function flowPlay() {
+  if (flowPlaying) return;
+  flowPlaying = true;
+
+  // 1. Carlos emite
+  var slog = document.getElementById('slog');
+  setTimeout(function() {
+    slog.innerHTML = '<span class="slog-recv">📨 emit "Hola" recibido</span>';
+  }, 400);
+
+  // 2. Servidor hace broadcast
+  setTimeout(function() {
+    slog.innerHTML += '<br><span class="slog-send">📡 broadcast a sala...</span>';
+  }, 900);
+
+  // 3. Llega a Ana
+  setTimeout(function() {
+    document.getElementById('chat-ana').innerHTML =
+      '<div class="cp-bubble cp-in">Carlos: Hola 👋</div>';
+  }, 1400);
+
+  // 4. Llega a Luis
+  setTimeout(function() {
+    document.getElementById('chat-luis').innerHTML =
+      '<div class="cp-bubble cp-in">Carlos: Hola 👋</div>';
+    slog.innerHTML += '<br><span class="slog-ok">✅ entregado (< 50ms)</span>';
+  }, 1800);
+}
+function flowReset() {
+  flowPlaying = false;
+  document.getElementById('slog').innerHTML = '<span class="slog-idle">esperando...</span>';
+  document.getElementById('chat-ana').innerHTML = '<div class="cp-idle">...</div>';
+  document.getElementById('chat-luis').innerHTML = '<div class="cp-idle">...</div>';
+}
+</script>
+```
+
+## El indicador "está escribiendo..." ✍️
+
+::: {.fragment .fade-up}
+¿Alguna vez te preguntaste cómo funciona eso?
+:::
+
+```{=html}
+<div class="typing-demo">
+  <div class="td-chat">
+    <div class="td-bubble in">Hola!</div>
+    <div class="td-typing" id="typing-ind" style="display:none">
+      <span class="td-dot"></span>
+      <span class="td-dot"></span>
+      <span class="td-dot"></span>
+      <span style="color:#999; font-size:0.8em; margin-left:6px">Ana está escribiendo...</span>
+    </div>
+  </div>
+  <div class="btn-row" style="margin-top:0.8em">
+    <button class="demo-btn" onclick="showTyping()">✍️ Ana empieza a escribir</button>
+  </div>
+</div>
+
+<script>
+function showTyping() {
+  document.getElementById('typing-ind').style.display = 'flex';
+  setTimeout(function() {
+    document.getElementById('typing-ind').style.display = 'none';
+    var chat = document.querySelector('.td-chat');
+    var b = document.createElement('div');
+    b.className = 'td-bubble in';
+    b.textContent = '¿Cómo estás? 😊';
+    chat.appendChild(b);
+  }, 2500);
+}
+</script>
+```
+
+::: {.fragment .fade-up}
+::: {.box-muted}
+Cada letra que tipeas dispara un evento `"escribiendo"`. El servidor lo reenvía. Los demás lo ven. Cuando el mensaje llega → el indicador desaparece.
+:::
+:::
+
+## Demo — prueba el chat tú mismo 💬
+
+```{=html}
+<div class="live-chat">
+
+  <div class="lc-window">
+    <div class="lc-header">📱 Tú</div>
+    <div class="lc-msgs" id="lc-msgs-you">
+      <div class="lc-bubble lc-in">Hola! ¿cómo estás?</div>
+      <div class="lc-bubble lc-out">¡Muy bien! ¿y tú?</div>
+    </div>
+    <div class="lc-input-row">
+      <input id="lc-input-you" class="lc-input" placeholder="Escribe algo..."/>
+      <button class="lc-send" onclick="lcSend('you')">➤</button>
+    </div>
+  </div>
+
+  <div class="lc-server">
+    <div class="lc-server-icon">🖥️</div>
+    <div class="lc-server-label">Servidor</div>
+    <div class="lc-server-log" id="lc-slog">
+      <div class="lc-slog-line dim">en espera...</div>
+    </div>
+  </div>
+
+  <div class="lc-window">
+    <div class="lc-header">📱 Tu amigo</div>
+    <div class="lc-msgs" id="lc-msgs-friend">
+      <div class="lc-bubble lc-out">Hola! ¿cómo estás?</div>
+      <div class="lc-bubble lc-in">¡Muy bien! ¿y tú?</div>
+    </div>
+    <div class="lc-input-row">
+      <input id="lc-input-friend" class="lc-input" placeholder="Escribe algo..."/>
+      <button class="lc-send" onclick="lcSend('friend')">➤</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function lcSend(from) {
+  var inputId = 'lc-input-' + from;
+  var el = document.getElementById(inputId);
+  var txt = el.value.trim();
+  if (!txt) return;
+  el.value = '';
+  var other = from === 'you' ? 'friend' : 'you';
+  var fromLabel = from === 'you' ? 'Tú' : 'Tu amigo';
+
+  // Mostrar burbuja en el emisor
+  addLcBubble('lc-msgs-' + from, txt, 'lc-out');
+
+  // Log servidor
+  var slog = document.getElementById('lc-slog');
+  slog.innerHTML = '';
+  addSlogLine('📨 emit("enviar-mensaje") recibido', 'active');
+  setTimeout(function(){ addSlogLine('📡 io.emit("mensaje-nuevo") → todos', 'active'); }, 350);
+
+  // Entregar al otro
+  setTimeout(function(){
+    addLcBubble('lc-msgs-' + other, fromLabel + ': ' + txt, 'lc-in');
+    addSlogLine('✅ entregado en < 50ms', 'done');
+  }, 700);
+}
+
+function addLcBubble(containerId, txt, cls) {
+  var c = document.getElementById(containerId);
+  var b = document.createElement('div');
+  b.className = 'lc-bubble ' + cls + ' lc-new';
+  b.textContent = txt;
+  c.appendChild(b);
+  c.scrollTop = c.scrollHeight;
+  setTimeout(function(){ b.classList.remove('lc-new'); }, 400);
+}
+
+function addSlogLine(txt, cls) {
+  var slog = document.getElementById('lc-slog');
+  var d = document.createElement('div');
+  d.className = 'lc-slog-line ' + cls;
+  d.textContent = txt;
+  slog.appendChild(d);
+}
+
+['you','friend'].forEach(function(who){
+  document.getElementById('lc-input-' + who)
+    .addEventListener('keydown', function(e){ if(e.key==='Enter') lcSend(who); });
+});
+</script>
+```
+
+::: {.box-muted}
+Escribe un mensaje en cualquier ventana 👆 — así funciona Socket.io por dentro.
+:::
+
+# El código — lo mínimo indispensable 🧩 {background-color="#0d0d0d"}
+
+## Solo 3 líneas en el servidor {auto-animate=true}
+
+```{.javascript data-id="server-code"}
+io.on("connection", (socket) => {
+  // alguien se conectó
+});
+```
+
+## Solo 3 líneas en el servidor {auto-animate=true}
+
+```{.javascript data-id="server-code"}
+io.on("connection", (socket) => {
+
+  socket.on("enviar-mensaje", (texto) => {
+    // recibí un mensaje → reenviar a todos
+    io.emit("mensaje-nuevo", texto);
+  });
+
+});
+```
+
+::: {.fragment .fade-up}
+::: {.box-muted}
+Recibe → reenvía. Eso es todo el corazón del servidor de chat.
+:::
+:::
+
+## Y en el cliente — también 3 líneas {auto-animate=true}
+
+```{.javascript data-id="client-code"}
+const socket = io("http://localhost:3001");
+```
+
+## Y en el cliente — también 3 líneas {auto-animate=true}
+
+```{.javascript data-id="client-code"}
+const socket = io("http://localhost:3001");
+
+// Cuando llega un mensaje → mostrarlo
+socket.on("mensaje-nuevo", (texto) => {
+  mostrarEnPantalla(texto);
+});
+
+// Cuando el usuario envía → mandarlo
+function enviar(texto) {
+  socket.emit("enviar-mensaje", texto);
+}
+```
+
+::: {.fragment .fade-up}
+::: {.box-accent}
+**`emit`** = envío · **`on`** = escucho
+
+Dos palabras. Un chat funcionando.
+:::
+:::
+
+# ¿Qué puedes construir con esto? 🚀 {background-color="#0d0d0d"}
+
+## Las posibilidades son infinitas
+
+```{=html}
+<div class="possibilities">
+  <div class="poss-card fade-item" style="animation-delay:0.1s">
+    <div class="poss-icon">💬</div>
+    <div class="poss-title">Chat en grupos</div>
+    <div class="poss-desc">Como grupos de WhatsApp o servidores de Discord</div>
+  </div>
+  <div class="poss-card fade-item" style="animation-delay:0.3s">
+    <div class="poss-icon">🎮</div>
+    <div class="poss-title">Juego multijugador</div>
+    <div class="poss-desc">Cada movimiento se transmite al instante</div>
+  </div>
+  <div class="poss-card fade-item" style="animation-delay:0.5s">
+    <div class="poss-icon">📊</div>
+    <div class="poss-title">Dashboard en vivo</div>
+    <div class="poss-desc">Métricas que se actualizan solas, sin recargar</div>
+  </div>
+  <div class="poss-card fade-item" style="animation-delay:0.7s">
+    <div class="poss-icon">✏️</div>
+    <div class="poss-title">Doc colaborativo</div>
+    <div class="poss-desc">Como Google Docs — varios editando a la vez</div>
+  </div>
+  <div class="poss-card fade-item" style="animation-delay:0.9s">
+    <div class="poss-icon">🔔</div>
+    <div class="poss-title">Notificaciones push</div>
+    <div class="poss-desc">El servidor avisa al usuario sin que haga nada</div>
+  </div>
+  <div class="poss-card fade-item" style="animation-delay:1.1s">
+    <div class="poss-icon">🏷️</div>
+    <div class="poss-title">Subasta en vivo</div>
+    <div class="poss-desc">El precio sube en tiempo real mientras todos lo ven</div>
+  </div>
+</div>
+```
+
+## Lo que aprendiste hoy {.center}
+
+```{=html}
+<div class="summary-list">
+  <div class="sum-item fade-item" style="animation-delay:0.1s">
+    <span class="sum-num">01</span>
+    <span class="sum-text"><strong>HTTP cierra la conexión</strong> — no puede recibir mensajes sin pedirlos</span>
+  </div>
+  <div class="sum-item fade-item" style="animation-delay:0.4s">
+    <span class="sum-num">02</span>
+    <span class="sum-text"><strong>WebSocket mantiene el canal abierto</strong> — mensajes en ambas direcciones, al instante</span>
+  </div>
+  <div class="sum-item fade-item" style="animation-delay:0.7s">
+    <span class="sum-num">03</span>
+    <span class="sum-text"><strong>Socket.io lo hace simple</strong> — <code>emit</code> para enviar, <code>on</code> para escuchar</span>
+  </div>
+  <div class="sum-item fade-item" style="animation-delay:1.0s">
+    <span class="sum-num">04</span>
+    <span class="sum-text"><strong>Next.js + Socket.io</strong> — el stack para construir tu propio WhatsApp hoy</span>
+  </div>
+</div>
+```
+
+## Para arrancar ahora mismo
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```bash
+# Crear el servidor
+mkdir mi-chat && cd mi-chat
+npm init -y
+npm install socket.io express
+
+# Crear el cliente Next.js
+npx create-next-app@latest cliente
+cd cliente
+npm install socket.io-client
+
+# Levantar todo
+node servidor.js      # puerto 3001
+npm run dev           # puerto 3000
+```
+
+:::
+::: {.column width="50%"}
+
+::: {.fragment .fade-up}
+::: {.callout-tip}
+**Recursos para seguir**
+
+`socket.io/get-started/chat` — tutorial oficial
+
+`nextjs.org/learn` — curso gratuito
+
+Código completo de este webinar → link en el chat 👇
+:::
+:::
+
+:::
+::::
+
+---
+
+::: {style="text-align:center; padding: 3em 0;"}
+
+::: {.r-fit-text}
+¡Gracias! 🎉
+:::
+
+[**@josephino**]{style="font-size:1.3em; color:#25D366;"}
+
+[Preguntas en el chat ahora 🎙️]{.text-muted}
+
+:::

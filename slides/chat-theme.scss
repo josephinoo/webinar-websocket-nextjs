@@ -1,0 +1,491 @@
+/*── chat-theme.scss — Webinar Chat en Tiempo Real ──────────────────────────*/
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700;800;900&display=swap');
+
+/*-- scss:defaults --*/
+/* ── Variables ──────────────────────────────────────────────────────────── */
+$bg:          #0d0d0d;
+$bg2:         #141414;
+$bg3:         #1c1c1c;
+$accent:      #25D366;
+$accent-dim:  rgba(37,211,102,0.10);
+$accent-brd:  rgba(37,211,102,0.30);
+$red:         #ef4444;
+$red-dim:     rgba(239,68,68,0.12);
+$text:        #e8e8e8;
+$muted:       #666;
+$dim:         #333;
+
+/*-- scss:rules --*/
+/* ── Base ───────────────────────────────────────────────────────────────── */
+.reveal {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  color: $text;
+  background: $bg;
+}
+.reveal .slides { text-align: left; }
+
+/* ── Headings ───────────────────────────────────────────────────────────── */
+.reveal h1 {
+  font-size: 2.8em; font-weight: 900;
+  letter-spacing: -0.03em; line-height: 1.1; color: #fff;
+}
+.reveal h2 {
+  font-size: 1.55em; font-weight: 700;
+  letter-spacing: -0.01em; color: #fff; margin-bottom: 0.5em;
+}
+
+/* Title slide */
+.reveal .title-slide h1 {
+  background: linear-gradient(130deg, #fff 0%, $accent 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.reveal .title-slide .subtitle { color: $muted; font-size: 1.05em; }
+
+/* ── Inline code ────────────────────────────────────────────────────────── */
+.reveal code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(37,211,102,0.10);
+  color: $accent; padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.82em;
+}
+
+/* ── Code blocks ────────────────────────────────────────────────────────── */
+.reveal pre {
+  background: #0a0e14; border: 1px solid $dim;
+  border-radius: 8px; font-size: 0.75em; margin: 0.5em 0; width: 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.reveal pre code {
+  font-family: 'JetBrains Mono', monospace;
+  padding: 1em 1.2em; background: transparent; color: $text;
+}
+
+/* ── Custom boxes ───────────────────────────────────────────────────────── */
+.box-accent {
+  background: $accent-dim; border: 1px solid $accent-brd;
+  border-left: 3px solid $accent; border-radius: 6px;
+  padding: 0.65em 1em; margin: 0.4em 0; font-size: 0.88em; color: $text;
+}
+.box-muted {
+  background: rgba(255,255,255,0.03); border: 1px solid $dim;
+  border-left: 3px solid $dim; border-radius: 6px;
+  padding: 0.65em 1em; margin: 0.4em 0; font-size: 0.88em; color: $muted;
+}
+.text-muted { color: $muted !important; font-size: 0.85em; }
+
+/* ── Callouts ───────────────────────────────────────────────────────────── */
+.reveal .callout { background: $bg2; border: 1px solid $dim; border-radius: 6px;
+  padding: 0.65em 1em; font-size: 0.85em; margin: 0.4em 0; }
+.reveal .callout-tip  { border-left: 3px solid $accent; }
+.reveal .callout-note { border-left: 3px solid #3b82f6; }
+.reveal .callout-title { font-weight: 700; color: #fff; margin-bottom: 0.2em; }
+
+/* ── Progress / controls ────────────────────────────────────────────────── */
+.reveal .progress { background: rgba(37,211,102,0.1); height: 3px; }
+.reveal .progress span { background: $accent; }
+.reveal .slide-number { color: $dim; font-family: 'JetBrains Mono'; font-size: 0.68em; }
+.reveal .footer { color: $dim; font-family: 'JetBrains Mono'; font-size: 0.64em; }
+.reveal .controls { color: $accent; }
+
+/* ── Tables ─────────────────────────────────────────────────────────────── */
+.reveal table { border-collapse: collapse; width: 100%; font-size: 0.88em; }
+.reveal table th { background: rgba(37,211,102,0.08); color: $accent;
+  font-weight: 700; padding: 0.4em 0.8em; border-bottom: 1px solid $accent-brd; text-align: left; }
+.reveal table td { padding: 0.35em 0.8em; border-bottom: 1px solid $dim; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATION KEYFRAMES
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(37,211,102,0); }
+}
+@keyframes typing-bounce {
+  0%,80%,100% { transform: translateY(0); }
+  40%         { transform: translateY(-6px); }
+}
+@keyframes flow-pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.4; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes bubble-pop {
+  0%   { opacity: 0; transform: scale(0.7); }
+  70%  { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes arrow-travel {
+  from { width: 0; opacity: 0; }
+  to   { width: 100%; opacity: 1; }
+}
+
+/* ── .fade-item helper (CSS-driven entrance, no JS needed) ───────────────── */
+.fade-item {
+  opacity: 0;
+  animation: fadeSlideUp 0.55s ease forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   JOURNEY ANIMATION (slide: "El mensaje no vuela solo")
+═══════════════════════════════════════════════════════════════════════════ */
+.journey {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5em; margin: 1.5em 0;
+}
+.journey-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3em;
+}
+.j-icon  { font-size: 3.5em; line-height: 1; }
+.j-label { font-size: 0.75em; color: $muted; text-align: center; }
+.journey-arrow {
+  font-size: 2.5em; color: $accent;
+  animation: flow-pulse 1.5s ease infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HTTP STEP DEMO
+═══════════════════════════════════════════════════════════════════════════ */
+.http-anim {
+  display: flex; align-items: center; gap: 0; margin: 0.8em 0;
+  background: $bg2; border: 1px solid $dim; border-radius: 10px; padding: 1em;
+}
+.actor { display: flex; flex-direction: column; align-items: center; gap: 0.2em; min-width: 100px; }
+.actor-icon { font-size: 2.8em; }
+.actor-name { font-size: 0.72em; color: $muted; }
+.http-lane {
+  flex: 1; display: flex; flex-direction: column; gap: 0.5em;
+  padding: 0 1em; min-height: 80px;
+}
+.http-arrow {
+  display: flex; align-items: center; gap: 0.5em;
+  padding: 0.25em 0.5em; border-radius: 4px;
+  font-size: 0.85em; opacity: 0; transition: opacity 0.4s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.http-arrow.arr-show { opacity: 1; }
+.arrow-out { background: $red-dim; color: #f87171; }
+.arrow-in  { background: $accent-dim; color: $accent; }
+.arr-label { font-size: 0.85em; color: $muted; }
+.conn-close { color: $red; font-size: 0.82em; font-family: 'JetBrains Mono'; padding: 0.2em 0; }
+.http-step-msg {
+  background: $bg3; border-radius: 6px; padding: 0.4em 0.8em;
+  font-family: 'JetBrains Mono'; font-size: 0.78em; color: $text;
+  min-height: 2em; margin-top: 0.5em;
+  opacity: 0; transition: opacity 0.4s;
+}
+.http-step-msg.msg-visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POLLING DEMO
+═══════════════════════════════════════════════════════════════════════════ */
+.polling-demo {
+  display: flex; flex-direction: column; gap: 0.4em; margin: 0.8em 0;
+}
+.poll-row {
+  display: flex; align-items: center; gap: 1em;
+  font-family: 'JetBrains Mono'; font-size: 0.78em;
+}
+.poll-q { color: #f87171; }
+.poll-a { padding: 0.1em 0.5em; border-radius: 4px; font-weight: 700; }
+.poll-no  { background: rgba(100,100,100,0.2); color: $muted; }
+.poll-yes { background: $accent-dim; color: $accent; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NUMBERS REVEAL
+═══════════════════════════════════════════════════════════════════════════ */
+.numbers-reveal {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1em; margin: 1.5em 0;
+}
+.num-block {
+  display: flex; flex-direction: column; align-items: center;
+  background: $bg2; border: 1px solid $dim; border-radius: 10px;
+  padding: 0.8em 1.2em;
+}
+.num-block-hot {
+  background: $red-dim; border-color: rgba(239,68,68,0.3);
+  animation: pulse-glow 2s ease infinite;
+}
+.big-num  { font-size: 2.2em; font-weight: 900; color: #fff; line-height: 1; }
+.num-desc { font-size: 0.72em; color: $muted; margin-top: 0.2em; text-align: center; }
+.num-op   { font-size: 2em; color: $muted; font-weight: 700; }
+.num-block-hot .big-num { color: #f87171; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WEBSOCKET DEMO
+═══════════════════════════════════════════════════════════════════════════ */
+.ws-scene {
+  display: flex; align-items: center; gap: 0;
+  background: $bg2; border: 1px solid $dim; border-radius: 10px;
+  padding: 1em 1.5em; margin: 0.5em 0;
+}
+.ws-actor { display: flex; flex-direction: column; align-items: center; min-width: 90px; }
+.ws-icon  { font-size: 2.5em; }
+.ws-name  { font-size: 0.72em; color: $muted; }
+.ws-middle { flex: 1; display: flex; align-items: center; padding: 0 1em; }
+.ws-line {
+  height: 4px; width: 100%; border-radius: 2px; transition: all 0.6s ease;
+}
+.ws-line-off { background: $dim; }
+.ws-line-on  { background: $accent; animation: pulse-glow 2s ease infinite; }
+.ws-status { font-size: 0.8em; margin: 0.3em 0; font-family: 'JetBrains Mono'; }
+.status-off { color: $red; }
+.status-on  { color: $accent; }
+.ws-log {
+  background: $bg; border: 1px solid $dim; border-radius: 6px;
+  padding: 0.5em 0.8em; min-height: 80px; max-height: 120px;
+  overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.74em;
+}
+.ws-log-line {
+  color: $text; padding: 0.15em 0;
+  animation: fadeSlideUp 0.3s ease forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HTTP vs WS COMPARISON
+═══════════════════════════════════════════════════════════════════════════ */
+.vs-layout {
+  display: flex; align-items: stretch; gap: 1.5em; margin: 0.5em 0;
+}
+.vs-col {
+  flex: 1; background: $bg2; border: 1px solid $dim;
+  border-radius: 10px; padding: 1em; display: flex; flex-direction: column; gap: 0.5em;
+}
+.vs-title { font-weight: 700; font-size: 0.95em; color: #fff; }
+.vs-content { flex: 1; display: flex; flex-direction: column; gap: 0.35em; }
+.vs-row { display: flex; gap: 0.5em; align-items: center; }
+.vs-divider {
+  display: flex; align-items: center; font-size: 1.6em;
+  font-weight: 900; color: $muted; padding: 0 0.2em;
+}
+.vs-footer { font-size: 0.75em; margin-top: 0.3em; }
+.vs-footer.bad  { color: $red; }
+.vs-footer.good { color: $accent; }
+
+.pill {
+  padding: 0.2em 0.6em; border-radius: 20px;
+  font-size: 0.73em; font-family: 'JetBrains Mono';
+}
+.pill.red   { background: $red-dim;    color: #f87171; }
+.pill.grey  { background: rgba(255,255,255,0.05); color: $muted; }
+.pill.green { background: $accent-dim; color: $accent; }
+
+.ws-channel-box { background: $bg; border: 1px solid $dim; border-radius: 6px; padding: 0.5em; }
+.ws-channel-bar {
+  text-align: center; font-size: 0.72em; font-weight: 700; color: $accent;
+  background: $accent-dim; border-radius: 4px; padding: 0.2em;
+  margin-bottom: 0.4em; animation: pulse-glow 2s ease infinite;
+}
+.ws-msg { font-family: 'JetBrains Mono'; font-size: 0.74em; padding: 0.15em 0.3em; }
+.ws-msg.out { color: $accent; }
+.ws-msg.in  { color: #93c5fd; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TWO WORDS ANIMATION
+═══════════════════════════════════════════════════════════════════════════ */
+.two-words {
+  display: flex; gap: 2em; justify-content: center; margin: 1em 0;
+}
+.word-card {
+  flex: 1; background: $bg2; border: 1px solid $dim;
+  border-radius: 12px; padding: 1.2em 1.5em;
+  display: flex; flex-direction: column; gap: 0.4em;
+  transition: all 0.5s ease;
+}
+.word-active {
+  border-color: $accent-brd; background: $accent-dim;
+  box-shadow: 0 0 20px rgba(37,211,102,0.12);
+}
+.word-big { font-size: 2.8em; font-weight: 900; color: $accent; font-family: 'JetBrains Mono'; }
+.word-meaning { font-size: 0.9em; font-weight: 700; color: #fff; }
+.word-example { font-size: 0.7em; color: $muted; font-family: 'JetBrains Mono'; margin-top: 0.3em; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EVENTS GRID
+═══════════════════════════════════════════════════════════════════════════ */
+.events-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1em; margin: 0.8em 0;
+}
+.event-card {
+  background: $bg2; border: 1px solid $dim; border-radius: 10px;
+  padding: 1em; text-align: center;
+  transition: border-color 0.3s;
+}
+.event-card:hover { border-color: $accent-brd; }
+.ev-icon  { font-size: 2em; margin-bottom: 0.2em; }
+.ev-name  { font-size: 0.72em; font-family: 'JetBrains Mono'; color: $accent; margin-bottom: 0.3em; }
+.ev-desc  { font-size: 0.7em; color: $muted; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOW SCENE (mensaje viaja)
+═══════════════════════════════════════════════════════════════════════════ */
+.flow-scene {
+  display: flex; align-items: flex-start; justify-content: center;
+  gap: 1.5em; margin: 0.5em 0;
+}
+.flow-actor, .flow-server {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3em;
+}
+.fa-icon  { font-size: 2.5em; }
+.fa-name  { font-size: 0.72em; color: $muted; }
+.chat-preview {
+  background: $bg2; border: 1px solid $dim; border-radius: 8px;
+  padding: 0.4em 0.6em; min-width: 140px; min-height: 40px;
+  font-size: 0.72em;
+}
+.cp-bubble { padding: 0.3em 0.6em; border-radius: 8px; margin: 0.15em 0; font-size: 0.85em; }
+.cp-out { background: $accent-dim; color: $accent; text-align: right; }
+.cp-in  {
+  background: $bg3; color: $text; text-align: left;
+  animation: bubble-pop 0.4s ease forwards;
+}
+.cp-idle { color: $dim; text-align: center; padding: 0.3em; }
+.flow-server .fa-icon { font-size: 2em; }
+.server-log-mini {
+  background: $bg; border: 1px solid $dim; border-radius: 6px;
+  padding: 0.4em 0.6em; min-width: 200px; min-height: 60px;
+  font-family: 'JetBrains Mono'; font-size: 0.65em; line-height: 1.8;
+}
+.slog-idle { color: $dim; }
+.slog-recv { color: #fbbf24; }
+.slog-send { color: #93c5fd; }
+.slog-ok   { color: $accent; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPING DEMO
+═══════════════════════════════════════════════════════════════════════════ */
+.typing-demo { margin: 0.8em 0; }
+.td-chat {
+  background: $bg2; border: 1px solid $dim; border-radius: 10px;
+  padding: 0.8em 1em; min-height: 80px; display: flex; flex-direction: column; gap: 0.4em;
+}
+.td-bubble { padding: 0.4em 0.8em; border-radius: 12px; font-size: 0.82em; max-width: 60%; }
+.td-bubble.in { background: $bg3; color: $text; }
+.td-typing {
+  display: flex; align-items: center; gap: 3px;
+  background: $bg3; border-radius: 12px;
+  padding: 0.5em 0.8em; max-width: 180px;
+}
+.td-dot {
+  width: 7px; height: 7px; background: $muted; border-radius: 50%;
+  animation: typing-bounce 1.2s ease infinite;
+}
+.td-dot:nth-child(1) { animation-delay: 0s; }
+.td-dot:nth-child(2) { animation-delay: 0.2s; }
+.td-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIVE CHAT DEMO
+═══════════════════════════════════════════════════════════════════════════ */
+.live-chat {
+  display: flex; gap: 1em; align-items: flex-start; margin: 0.3em 0;
+}
+.lc-window {
+  flex: 1; background: $bg2; border: 1px solid $dim;
+  border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
+}
+.lc-header {
+  background: $bg3; padding: 0.4em 0.8em;
+  font-size: 0.8em; font-weight: 700; color: #fff;
+  border-bottom: 1px solid $dim;
+}
+.lc-msgs {
+  flex: 1; padding: 0.6em; display: flex; flex-direction: column;
+  gap: 0.35em; min-height: 140px; max-height: 140px; overflow-y: auto;
+}
+.lc-bubble {
+  padding: 0.35em 0.7em; border-radius: 10px;
+  font-size: 0.78em; max-width: 85%;
+}
+.lc-out { background: $accent-dim; color: $accent; align-self: flex-end; text-align: right; }
+.lc-in  { background: $bg3; color: $text; align-self: flex-start; }
+.lc-new { animation: bubble-pop 0.35s ease; }
+.lc-input-row {
+  display: flex; padding: 0.4em; gap: 0.3em;
+  border-top: 1px solid $dim;
+}
+.lc-input {
+  flex: 1; background: $bg; border: 1px solid $dim; border-radius: 20px;
+  padding: 0.3em 0.7em; color: $text; font-size: 0.78em; font-family: 'Inter';
+  outline: none;
+  &:focus { border-color: $accent-brd; }
+}
+.lc-send {
+  background: $accent; border: none; border-radius: 50%; width: 30px; height: 30px;
+  cursor: pointer; color: #000; font-size: 0.8em; display: flex;
+  align-items: center; justify-content: center;
+  transition: background 0.2s;
+  &:hover { background: darken(#25D366, 10%); }
+}
+.lc-server {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3em;
+  min-width: 180px;
+}
+.lc-server-icon { font-size: 2em; }
+.lc-server-label { font-size: 0.72em; color: $muted; }
+.lc-server-log {
+  background: $bg; border: 1px solid $dim; border-radius: 6px;
+  padding: 0.4em 0.6em; width: 100%; min-height: 130px;
+  font-family: 'JetBrains Mono'; font-size: 0.65em; line-height: 1.9;
+}
+.lc-slog-line { padding: 0.05em 0; }
+.lc-slog-line.dim    { color: $dim; }
+.lc-slog-line.active { color: #fbbf24; animation: fadeSlideUp 0.3s ease; }
+.lc-slog-line.done   { color: $accent; animation: fadeSlideUp 0.3s ease; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POSSIBILITIES GRID
+═══════════════════════════════════════════════════════════════════════════ */
+.possibilities {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1em; margin: 0.5em 0;
+}
+.poss-card {
+  background: $bg2; border: 1px solid $dim; border-radius: 10px;
+  padding: 1em; text-align: center; transition: border-color 0.3s, transform 0.3s;
+  &:hover { border-color: $accent-brd; transform: translateY(-3px); }
+}
+.poss-icon  { font-size: 2.2em; margin-bottom: 0.2em; }
+.poss-title { font-size: 0.88em; font-weight: 700; color: #fff; margin-bottom: 0.2em; }
+.poss-desc  { font-size: 0.72em; color: $muted; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SUMMARY LIST
+═══════════════════════════════════════════════════════════════════════════ */
+.summary-list {
+  display: flex; flex-direction: column; gap: 0.7em; margin: 0.5em 0;
+}
+.sum-item {
+  display: flex; align-items: center; gap: 1em;
+  background: $bg2; border: 1px solid $dim; border-radius: 8px; padding: 0.7em 1em;
+}
+.sum-num {
+  font-size: 1.6em; font-weight: 900; color: $accent;
+  font-family: 'JetBrains Mono'; min-width: 1.5em;
+}
+.sum-text { font-size: 0.88em; color: $text; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHARED BUTTON STYLES
+═══════════════════════════════════════════════════════════════════════════ */
+.btn-row { display: flex; gap: 0.6em; margin-top: 0.6em; }
+.demo-btn {
+  background: $accent; border: none; border-radius: 6px;
+  padding: 0.4em 1.1em; cursor: pointer; font-size: 0.78em;
+  font-family: 'Inter'; font-weight: 700; color: #000;
+  transition: background 0.2s, transform 0.15s;
+  &:hover { background: lighten(#25D366, 5%); transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+}
+.demo-btn-ghost {
+  background: transparent; border: 1px solid $dim;
+  color: $muted;
+  &:hover { border-color: $accent-brd; color: $accent; background: $accent-dim; }
+}
