@@ -1,4 +1,4 @@
-name: Render and Publish Quarto Slides
+name: Render and Publish Quarto Slides en github pages
 
 on:
   push:
