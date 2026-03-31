@@ -39,6 +39,7 @@ jobs:
           mkdir _site
           mv slides/whatsapp-chat.html _site/index.html
           if [ -d "slides/whatsapp-chat_files" ]; then mv slides/whatsapp-chat_files _site/; fi
+          cp slides/*.png slides/*.mp4 slides/*.avif _site/ 2>/dev/null || true
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
