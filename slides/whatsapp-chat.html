@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.35">
 
   <meta name="author" content="@josephino">
-  <meta name="dcterms.date" content="2025-01-01">
+  <meta name="dcterms.date" content="2025-03-30">
   <title>Crea tu propio WhatsApp</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -208,7 +208,29 @@
 </div>
 </div>
 
-  <p class="date">2025-01-01</p>
+  <p class="date">2025-03-30</p>
+</section>
+<section id="section" class="slide level2 center" data-background-color="#0d0d0d">
+<h2></h2>
+<div style="text-align: center; margin-top: 1em;">
+  <div style="width: 250px; height: 250px; margin: 0 auto; border-radius: 50%; border: 3px solid #25D366; overflow: hidden; background: #ffffff;">
+    <img src="profile.png" alt="Joseph Avila Alvarez" style="width: 100%; height: 100%; object-fit: contain; object-position: center;">
+  </div>
+  <h2 style="color: #ffffff; font-size: 2.2em; font-weight: bold; margin-top: 0.8em; letter-spacing: -0.02em;">Joseph Avila Alvarez</h2>
+</div>
+<aside class="notes">
+<p>Saluda y preséntate brevemente. “Soy Joseph, desarrollador full-stack. Hoy vamos a construir juntos un chat en tiempo real desde cero, sin magia, entendiendo exactamente cómo funciona cada pieza.” Máximo 30 segundos aquí.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section>
 <section id="cómo-funciona-whatsapp" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -220,6 +242,19 @@
 <div class="r-fit-text">
 <p>¿A dónde va? 🤔</p>
 </div>
+<aside class="notes">
+<p>Pregunta retórica para enganchar. “Todos usamos WhatsApp todos los días, pero muy pocos sabemos qué pasa exactamente cuando presionamos Enviar. Hoy lo vamos a descubrir.” Pausa dramática antes de pasar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="el-mensaje-no-vuela-solo" class="slide level2 center">
 <h2>El mensaje no vuela solo</h2>
@@ -244,6 +279,19 @@
 <p>Siempre hay un <strong>servidor en el medio</strong>. WhatsApp, Instagram, Slack, Discord — todos funcionan igual.</p>
 </div>
 </div>
+<aside class="notes">
+<p>El punto clave: ningún mensaje llega directo de teléfono a teléfono. Siempre pasa por un servidor. Esto aplica a WhatsApp, Instagram, Slack, Discord, Teams — todos. El servidor es el árbitro. Aprovecha para preguntar: “¿Alguien sabía esto?” — genera participación.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="http-el-cartero-viejo" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -307,12 +355,38 @@ function httpReset() {
   m.classList.remove('msg-visible');
 }
 </script>
+<aside class="notes">
+<p>Haz clic en “Siguiente paso” para animar cada fase. Explica mientras avanza: “El browser pide → el servidor responde → y la conexión se CIERRA. Esto es HTTP: una conversación de una sola vez. Como mandar una carta y esperar respuesta. Perfectamente válido para cargar páginas… pero terrible para un chat.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="el-problema-para-un-chat" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">El problema para un chat</h2>
 <div data-id="polling-title">
 <p>Con HTTP tienes que <strong>preguntar cada segundo:</strong></p>
 </div>
+<aside class="notes">
+<p>Esta slide es la transición. Haz una pausa y pregunta: “Si HTTP cierra la conexión… ¿cómo le llegan los mensajes nuevos?” Déjalos pensar 2-3 segundos antes de pasar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="el-problema-para-un-chat-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">El problema para un chat</h2>
@@ -331,6 +405,19 @@ function httpReset() {
 <p>Esto se llama <strong>polling</strong> — y es como llamar al cartero cada minuto para preguntar si llegó algo. 📬</p>
 </div>
 </div>
+<aside class="notes">
+<p>“Esta técnica se llama polling. Es la solución más obvia pero la más costosa. Noten que el browser pregunta una y otra vez y casi siempre la respuesta es ‘No’. Imagina hacer esto con miles de usuarios simultáneos.” Espera el fragmento con la caja antes de pasar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="en-números-reales" class="slide level2">
 <h2>En números reales 🔥</h2>
@@ -356,6 +443,19 @@ function httpReset() {
 <p>Le estás gritando al cartero mil veces y casi nunca tiene carta.</p>
 </div>
 </div>
+<aside class="notes">
+<p>“Mil requests por segundo. Eso son 60,000 por minuto, 3.6 millones por hora. Y el 99% no sirven de nada. Esto mata servidores y satura la red. Necesitamos algo completamente diferente.” Aquí está el momento de tensión antes de revelar la solución.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="websocket-el-teléfono-que-no-cuelga" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -380,6 +480,19 @@ function httpReset() {
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>“La diferencia es fundamental. HTTP es como mandar cartas: cada mensaje es independiente, la conexión muere. WebSocket es como una llamada: marcas una vez y el canal queda abierto indefinidamente. Cualquiera de los dos lados puede hablar en cualquier momento sin esperar turno.” Espera el fragmento antes de continuar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="cómo-se-abre-la-conexión-websocket" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Cómo se abre la conexión WebSocket</h2>
@@ -438,6 +551,19 @@ function wsReset() {
   document.getElementById('ws-status').innerHTML = 'Canal: <span class="status-off">Cerrado ✗</span>';
 }
 </script>
+<aside class="notes">
+<p>Usa los botones para animar. “Primero el browser pide abrir un WebSocket — esto es el ‘handshake’. El servidor acepta y desde ese momento el canal está verde, abierto. Ahora miren: los mensajes fluyen en ambas direcciones sin pedir permiso cada vez. Ni el servidor ni el cliente tienen que iniciar una nueva conexión para hablar.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="http-vs-websocket-visual" class="slide level2 center">
 <h2>HTTP vs WebSocket — visual</h2>
@@ -471,6 +597,19 @@ function wsReset() {
   </div>
 
 </div>
+<aside class="notes">
+<p>“La comparación habla por sí sola. A la izquierda: conexiones que se abren y cierran constantemente, casi siempre para nada. A la derecha: una sola conexión abierta, mensajes que van y vienen instantáneamente. WebSocket no es solo más eficiente — es el único enfoque que tiene sentido para comunicación en tiempo real.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="socket.io-websocket-sin-dolor" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -497,6 +636,19 @@ function wsReset() {
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>“Socket.io envuelve WebSocket y le agrega superpoderes. Lo más valioso: la reconexión automática (si el usuario pierde wifi, Socket.io lo reconecta solo), las salas de chat (para grupos sin código extra), y la compatibilidad universal. Podrías usar WebSocket nativo… pero ¿para qué sufrir?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="la-idea-central-eventos" class="slide level2">
 <h2>La idea central — Eventos 🎯</h2>
@@ -532,6 +684,19 @@ function wsReset() {
 <p>Exactamente como la vida real: suena el timbre → <em>evento “timbre”</em> → abres la puerta.</p>
 </div>
 </div>
+<aside class="notes">
+<p>“Todo en Socket.io gira alrededor de eventos con nombre. Tú defines los nombres — pueden ser cualquier string. ‘enviar-mensaje’, ‘usuario-escribiendo’, ‘sala-llena’ — lo que necesites. El sistema escucha esos nombres y reacciona. Es el patrón más intuitivo que existe para comunicación en tiempo real.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solo-dos-palabras-que-necesitas-saber" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Solo dos palabras que necesitas saber</h2>
@@ -547,6 +712,19 @@ function wsReset() {
   </div>
 </div>
 </div>
+<aside class="notes">
+<p>Pausa de suspenso. “Hay exactamente dos palabras que necesitas aprender para dominar Socket.io. Solo dos. Las dos más importantes que existen en este ecosistema.” Pausa 2 segundos antes de pasar a la siguiente slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solo-dos-palabras-que-necesitas-saber-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Solo dos palabras que necesitas saber</h2>
@@ -569,6 +747,19 @@ function wsReset() {
 <p>Con <code>emit</code> y <code>on</code> construyes <strong>cualquier feature de un chat real</strong>. Eso es todo.</p>
 </div>
 </div>
+<aside class="notes">
+<p>“emit = yo hablo. on = yo escucho. Con estas dos palabras puedes construir mensajes privados, notificaciones, indicador de escritura, estado en línea, reacciones… cualquier cosa. Cuando alguien dice que Socket.io es complejo, probablemente no sabe que todo se reduce a estas dos palabras.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="el-flujo-completo-en-vivo" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -655,6 +846,19 @@ function flowReset() {
   document.getElementById('chat-luis').innerHTML = '<div class="cp-idle">...</div>';
 }
 </script>
+<aside class="notes">
+<p>Haz clic en “Ver cómo viaja el mensaje” y narra mientras pasa: “Carlos emite el evento. El servidor lo recibe en millisegundos. Hace broadcast a todos los conectados a la sala. Ana lo recibe. Luis lo recibe. Todo en menos de 50ms — en tiempo real.” Puedes repetir la animación si el grupo lo pide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="el-indicador-está-escribiendo" class="slide level2">
 <h2>El indicador “está escribiendo…” ✍️</h2>
@@ -694,6 +898,19 @@ function showTyping() {
 <p>Cada letra que tipeas dispara un evento <code>"escribiendo"</code>. El servidor lo reenvía. Los demás lo ven. Cuando el mensaje llega → el indicador desaparece.</p>
 </div>
 </div>
+<aside class="notes">
+<p>Haz clic en el botón para mostrar el indicador de escritura. “Algo tan simple como los tres puntitos de ‘está escribiendo’ es puro Socket.io. Cada keystroke emite un evento. El servidor lo reenvía. Cuando se envía el mensaje, el evento ‘dejó de escribir’ borra el indicador. Son literalmente 4 líneas de código extra.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="demo-prueba-el-chat-tú-mismo" class="slide level2">
 <h2>Demo — prueba el chat tú mismo 💬</h2>
@@ -785,6 +1002,19 @@ function addSlogLine(txt, cls) {
 <div class="box-muted">
 <p>Escribe un mensaje en cualquier ventana 👆 — así funciona Socket.io por dentro.</p>
 </div>
+<aside class="notes">
+<p>Invita al público a interactuar: “Abran el chat en pantalla compartida si están en vivo, o si están en persona pasen el control. Prueben enviar mensajes de ambos lados.” Deja 1-2 minutos para la interacción. Señala el log del servidor: “Vean cómo el servidor procesa cada evento en tiempo real.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="el-código-lo-mínimo-indispensable" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -796,6 +1026,19 @@ function addSlogLine(txt, cls) {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-id="server-code"><pre class="sourceCode javascript code-with-copy" data-id="quarto-animate-code"><code class="sourceCode javascript hljs"><span id="cb1-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>io<span class="op">.</span><span class="fu">on</span>(<span class="st">"connection"</span><span class="op">,</span> (socket) <span class="kw">=&gt;</span> {</span>
 <span id="cb1-2" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co">// alguien se conectó</span></span>
 <span id="cb1-3" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>“Empezamos con lo mínimo. <code>io.on('connection')</code> — Socket.io llama a esta función cada vez que alguien se conecta. El parámetro <code>socket</code> representa a esa persona específica. Hasta aquí no hacemos nada, pero ya tenemos la puerta abierta.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solo-3-líneas-en-el-servidor-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Solo 3 líneas en el servidor</h2>
@@ -812,10 +1055,36 @@ function addSlogLine(txt, cls) {
 <p>Recibe → reenvía. Eso es todo el corazón del servidor de chat.</p>
 </div>
 </div>
+<aside class="notes">
+<p>“Miren el corazón del servidor: cuando alguien emite ‘enviar-mensaje’, el servidor lo recibe y hace <code>io.emit('mensaje-nuevo')</code> — que se lo manda a TODOS los conectados, incluyendo quien lo envió. Eso es todo. Un chat funcional en menos de 10 líneas de código real.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="y-en-el-cliente-también-3-líneas" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Y en el cliente — también 3 líneas</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-id="client-code"><pre class="sourceCode javascript code-with-copy" data-id="quarto-animate-code"><code class="sourceCode javascript hljs"><span id="cb3-1" class="hljs-ln-code"><a href="" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> socket <span class="op">=</span> <span class="fu">io</span>(<span class="st">"http://localhost:3001"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>“Una línea. Con eso el cliente ya tiene un WebSocket abierto y persistente con el servidor. Socket.io maneja el handshake, el protocolo, los reintentos — todo. Esta línea es suficiente para tener la conexión.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="y-en-el-cliente-también-3-líneas-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Y en el cliente — también 3 líneas</h2>
@@ -836,6 +1105,19 @@ function addSlogLine(txt, cls) {
 <p>Dos palabras. Un chat funcionando.</p>
 </div>
 </div>
+<aside class="notes">
+<p>“Aquí está el cliente completo. <code>socket.on</code> escucha mensajes nuevos y los muestra. <code>socket.emit</code> envía lo que escribe el usuario. Combinado con el servidor que vimos antes, esto es un chat en tiempo real funcionando. Pueden probarlo ahora mismo clonando el repo del webinar.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="qué-puedes-construir-con-esto" class="title-slide slide level1 center" data-background-color="#0d0d0d">
@@ -876,6 +1158,19 @@ function addSlogLine(txt, cls) {
     <div class="poss-desc">El precio sube en tiempo real mientras todos lo ven</div>
   </div>
 </div>
+<aside class="notes">
+<p>“Una vez que entiendes emit y on, todas estas cosas se vuelven triviales. Los juegos multijugador son solo posiciones emitidas como eventos. Un dashboard en vivo son métricas emitidas cada segundo. Un doc colaborativo son cambios emitidos a todos. El patrón es siempre el mismo — solo cambia el nombre del evento y el dato que llevas.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="lo-que-aprendiste-hoy" class="slide level2 center">
 <h2>Lo que aprendiste hoy</h2>
@@ -897,6 +1192,19 @@ function addSlogLine(txt, cls) {
     <span class="sum-text"><strong>Next.js + Socket.io</strong> — el stack para construir tu propio WhatsApp hoy</span>
   </div>
 </div>
+<aside class="notes">
+<p>“Repasemos lo que cubrimos hoy. Uno: HTTP cierra la conexión — no sirve para tiempo real. Dos: WebSocket mantiene el canal abierto — es la solución correcta. Tres: Socket.io lo hace accesible con emit y on. Cuatro: con Next.js como frontend tienes todo el stack para construir algo real hoy mismo.” Pausa después de cada punto para que resuene.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="para-arrancar-ahora-mismo" class="slide level2">
 <h2>Para arrancar ahora mismo</h2>
@@ -935,6 +1243,323 @@ function addSlogLine(txt, cls) {
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>“Los comandos en pantalla son literalmente todo lo que necesitan para arrancar hoy. El repo con el código completo está en el chat — incluyendo el servidor Express, el cliente Next.js y todo configurado. Socket.io tiene uno de los mejores tutoriales de la industria, úsenlo. Y si tienen preguntas después del webinar, búsquenme en Twitter como <span class="citation" data-cites="josephino">@josephino</span>.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-1" class="slide level2 center" data-background-color="#000000">
+<h2></h2>
+<div class="domain-expansion-slide" id="domain-slide">
+
+  <!-- Full-viewport background video (revealed on click) -->
+  <video class="de-bg" id="de-bg" src="video.mp4" loop="" muted="" playsinline="" preload="auto"></video>
+
+  <!-- Full-viewport dark overlay -->
+  <div class="de-overlay" id="de-overlay"></div>
+
+  <!-- Full-viewport particles -->
+  <div class="de-particles" id="de-particles"></div>
+
+  <!-- Content -->
+  <div class="de-content" id="de-content">
+    <div class="de-kanji" id="de-kanji">呪域展開</div>
+    <div class="de-title" id="de-title">DOMAIN EXPANSION</div>
+    <div class="de-subtitle" id="de-subtitle">WebSocket — Demo</div>
+    <div class="de-qr" id="de-qr">
+      <div class="de-qr-box">🔗 Abre el chat en vivo</div>
+      <div class="de-url">localhost:3000</div>
+    </div>
+  </div>
+
+  <!-- Trigger button -->
+  <button class="de-trigger" id="de-trigger" onclick="activateDomain()">⚡ ACTIVAR EXPANSIÓN</button>
+
+</div>
+
+<style>
+/* The wrapper itself just centers the content */
+.domain-expansion-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  z-index: 10;
+}
+
+/* These will be moved to .reveal-viewport so they use 100% of the screen */
+.de-bg {
+  position: fixed; 
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  z-index: 0; /* above the Reveal black backgrounds, below slides */
+  pointer-events: none;
+}
+.de-bg.active { opacity: 1; }
+
+.de-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%,
+    rgba(120,0,255,0.35) 0%,
+    rgba(0,0,0,0.75) 65%,
+    rgba(0,0,0,0.92) 100%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s ease 0.5s;
+  pointer-events: none;
+}
+.de-overlay.active { opacity: 1; }
+
+.de-particles {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+}
+.de-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-up linear infinite;
+  opacity: 0;
+}
+@keyframes float-up {
+  0%   { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-120vh) scale(0.2); opacity: 0; }
+}
+
+.de-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.de-kanji {
+  font-size: 3.5em;
+  font-weight: 900;
+  color: #fff;
+  opacity: 0;
+  text-shadow:
+    0 0 20px #7c3aed,
+    0 0 60px #7c3aed,
+    0 0 120px #7c3aed;
+  letter-spacing: 0.15em;
+  transform: scale(0.1) rotate(-15deg);
+  transition: all 0.9s cubic-bezier(0.34,1.56,0.64,1) 1.0s;
+}
+.de-kanji.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+.de-title {
+  font-size: 2.4em;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a855f7;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 1.7s;
+  text-shadow: 0 0 30px rgba(168,85,247,0.8);
+}
+.de-title.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.de-subtitle {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #22d3ee;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease 2.2s;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px rgba(34,211,238,0.7);
+}
+.de-subtitle.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.de-qr {
+  margin-top: 1.2em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease 2.8s;
+}
+.de-qr.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.de-qr-box {
+  background: rgba(168,85,247,0.2);
+  border: 2px solid #a855f7;
+  border-radius: 12px;
+  padding: 0.5em 1.8em;
+  font-size: 1.1em;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 25px rgba(168,85,247,0.4);
+}
+.de-url {
+  margin-top: 0.4em;
+  font-size: 0.9em;
+  color: #a855f7;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+}
+.de-trigger {
+  position: relative;
+  z-index: 20;
+  margin-top: 2em;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7em 2.2em;
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(168,85,247,0.6);
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+.de-trigger:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 50px rgba(168,85,247,0.9);
+}
+.de-trigger.hidden { display: none; }
+
+/* Screen flash */
+@keyframes screen-flash {
+  0%   { background: rgba(255,255,255,0); }
+  20%  { background: rgba(255,255,255,0.95); }
+  100% { background: rgba(255,255,255,0); }
+}
+.de-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  animation: screen-flash 0.6s ease forwards;
+}
+</style>
+
+<script>
+(function() {
+  function prepareDomainExpansion() {
+    // Escapar de la escala de transform moviendo las capas al viewport global
+    var viewport = document.querySelector('.reveal-viewport') || document.body;
+    ['de-bg', 'de-overlay', 'de-particles'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.parentElement !== viewport) {
+        viewport.appendChild(el);
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', prepareDomainExpansion);
+  } else {
+    prepareDomainExpansion();
+  }
+  // Backup por si Reveal hace rendering retardado
+  setTimeout(prepareDomainExpansion, 500);
+})();
+
+function activateDomain() {
+
+  // Screen flash over everything
+  var flash = document.createElement('div');
+  flash.className = 'de-flash';
+  document.body.appendChild(flash);
+  setTimeout(function(){ flash.remove(); }, 700);
+
+  // Hide button
+  document.getElementById('de-trigger').classList.add('hidden');
+
+  // Activate bg (play video) + overlay
+  setTimeout(function(){
+    var bgVid = document.getElementById('de-bg');
+    bgVid.classList.add('active');
+    bgVid.currentTime = 0;
+    bgVid.play().catch(function(e) { console.warn(e); });
+    document.getElementById('de-overlay').classList.add('active');
+  }, 200);
+
+  // Spawn particles
+  setTimeout(function(){
+    spawnParticles();
+  }, 400);
+
+  // Activate text elements
+  ['de-kanji','de-title','de-subtitle','de-qr'].forEach(function(id){
+    document.getElementById(id).classList.add('active');
+  });
+}
+
+function spawnParticles() {
+  var container = document.getElementById('de-particles');
+  var colors = ['#a855f7','#7c3aed','#22d3ee','#ffffff','#e879f9'];
+  for (var i = 0; i < 60; i++) {
+    (function(){
+      var p = document.createElement('div');
+      p.className = 'de-particle';
+      var size = Math.random() * 8 + 3;
+      var left = Math.random() * 100;
+      var delay = Math.random() * 3;
+      var dur = Math.random() * 4 + 3;
+      var color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'left:' + left + '%',
+        'bottom:-10px',
+        'background:' + color,
+        'animation-delay:' + delay + 's',
+        'animation-duration:' + dur + 's',
+        'box-shadow: 0 0 6px ' + color
+      ].join(';');
+      container.appendChild(p);
+    })();
+  }
+}
+</script>
+<aside class="notes">
+<p>Momento épico de la presentación. Haz clic en “ACTIVAR EXPANSIÓN” para la animación. “Y con esto… damos inicio al Domain Expansion — la demo en vivo. Abran localhost:3000 desde su navegador y prueben el chat real que construimos juntos.” Deja que la animación corra completamente antes de hablar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -945,6 +1570,19 @@ function addSlogLine(txt, cls) {
 <p><span style="font-size:1.3em; color:#25D366;"><strong><span class="citation" data-cites="josephino">@josephino</span></strong></span></p>
 <p><span class="text-muted">Preguntas en el chat ahora 🎙️</span></p>
 </div>
+<aside class="notes">
+<p>Slide final. Agradece al público. “Gracias a todos por estar aquí. Si construyen algo con Socket.io, etiquétenme en Twitter — me encanta ver lo que hacen. Preguntas en el chat ahora mismo.” Mantén esta slide mientras respondes preguntas — da un look profesional al cierre.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>
